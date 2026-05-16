@@ -1080,7 +1080,7 @@ async function loadAndEmitProviders() {
 
 export function getVSCodeAPI(): VSCodeAPI {
   return {
-    postMessage: (msg) => {
+    postMessage: (msg: unknown) => {
       void routeOutbound(msg as WebviewMessage)
     },
     getState: () => undefined,

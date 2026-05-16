@@ -10,13 +10,18 @@
     "strict": true,
     "noEmit": true,
     "allowImportingTsExtensions": false,
-    "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "resolveJsonModule": true,
+    "skipLibCheck": true,
     "paths": {
-      "@kiloclaw/*": ["../kilo-vscode/webview-ui/kiloclaw/*"],
-      "@agent-manager/*": ["../kilo-vscode/webview-ui/agent-manager/*"]
+      "@kilo-app/*": ["../kilo-vscode/webview-ui/src/*"]
     }
   },
-  "include": ["src/**/*", "vite.config.ts"]
+  "include": ["src/**/*", "vite.config.ts"],
+  "exclude": [
+    "../kilo-vscode/webview-ui/src/**/*",
+    "../ui/**/*",
+    "../kilo-ui/**/*",
+    "node_modules"
+  ]
 }
