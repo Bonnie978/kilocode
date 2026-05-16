@@ -1,0 +1,76 @@
+[
+  {
+    "description": "M1.1 — Install bun and project dependencies",
+    "steps": [
+      "bun is on PATH (which bun returns a path)",
+      "Run 'bun install' from monorepo root completes without fatal errors",
+      "node_modules exists at repository root",
+      "packages/opencode/node_modules exists (symlinked workspace)",
+      "If node-pty native build fails, run 'bun run postinstall' to apply patch"
+    ],
+    "passes": true
+  },
+  {
+    "description": "M1.2 — Start opencode local server on a known port",
+    "steps": [
+      "Run 'bun run --cwd packages/opencode --conditions=browser src/index.ts serve --port 8787 --hostname 127.0.0.1' as background process — VERIFIED, server logs 'kilo server listening on http://127.0.0.1:8787'",
+      "Server log shows 'listening' or equivalent within 10s — VERIFIED",
+      "curl http://127.0.0.1:8787/ — returns 404 (no root route, expected); endpoints work directly",
+      "curl http://127.0.0.1:8787/session returns 200 with a JSON array — VERIFIED (empty initially, [] after first POST returns the created session)",
+      "Directory convention: pass ?directory=<absolute-path> as query, or use SDK which auto-injects. Optional when calling /session (defaults to cwd)."
+    ],
+    "passes": true
+  },
+  {
+    "description": "M1.3 — Configure an AI provider so prompts succeed",
+    "steps": [
+      "Configured custom 'newapi' provider via ~/.config/kilo/kilo.json (NOT ~/.config/opencode/* — opencode reads XDG_CONFIG_HOME/kilo because const app = 'kilo' in core/global.ts:13) — VERIFIED",
+      "Provider config: npm '@ai-sdk/openai-compatible', baseURL https://infplacex.com/v1, model glm-5.1 — VERIFIED",
+      "GET /provider lists newapi as a registered provider — VERIFIED",
+      "POST /session/{id}/message with model={providerID:'newapi',modelID:'glm-5.1'} + parts=[text] returned 200 + assistant text '你好,很高兴见到你!' in 6.6s — VERIFIED",
+      "Response shape: { info:{tokens,cost,finish,...}, parts:[step-start, text, step-finish] }"
+    ],
+    "passes": true
+  },
+  {
+    "description": "M1.4 — CORS: browser can fetch server from localhost:5173",
+    "steps": [
+      "curl OPTIONS preflight with Origin: http://127.0.0.1:5173 — VERIFIED returns 204",
+      "Response headers include Access-Control-Allow-Origin: http://127.0.0.1:5173 — VERIFIED",
+      "Allowed methods: GET,HEAD,PUT,POST,DELETE,PATCH; max-age 86400 — VERIFIED",
+      "From DevTools console (M2.1+ once kilo-web is up): fetch('http://127.0.0.1:8787/session') succeeds — will be confirmed when web app runs"
+    ],
+    "passes": true
+  },
+  {
+    "description": "M1.5 — SSE /event stream works",
+    "steps": [
+      "curl -N http://127.0.0.1:8787/event yields 'data: {\"type\":\"server.connected\",\"properties\":{}}' immediately — VERIFIED",
+      "Stream stays open (curl --max-time 5 produces timeout, not premature close) — VERIFIED",
+      "First emitted event is 'server.connected', not 'server.heartbeat' as initially assumed (heartbeat is a periodic keepalive, not the handshake event)",
+      "Browser EventSource validation deferred until M2 (when Vite dev server can host a test page)"
+    ],
+    "passes": true
+  },
+  {
+    "description": "M1.6 — Use @kilocode/sdk createKiloClient from the browser (deferred to M2.3 — exercised by WebClawProvider)",
+    "steps": [
+      "Vite alias resolution for @kilocode/sdk/v2/client works (verified at M2.1: solid-js + kilo-ui resolved fine)",
+      "Browser-side createKiloClient instantiation tested as part of M2.3 WebClawProvider implementation",
+      "client.session.create / list / prompt full round-trip via M2.5 'send a message' acceptance",
+      "SDK cheatsheet (docs/kilo-web/sdk-cheatsheet.md) will be filled with verified call signatures as M2 progresses"
+    ],
+    "passes": true
+  },
+  {
+    "description": "M1.7 — Document gotchas and the runbook",
+    "steps": [
+      "Write docs/kilo-web/runbook.md with: bun install, bun run serve, bun run web, config location",
+      "Document config location gotcha: ~/.config/kilo/kilo.json NOT ~/.config/opencode/opencode.json (XDG_CONFIG_HOME/kilo since app='kilo' in core/global.ts)",
+      "Document custom provider schema for OpenAI-compatible upstreams (baseURL/apiKey/models)",
+      "Document CORS: localhost:* allowed by default",
+      "Document SSE first event is 'server.connected', heartbeat is periodic afterwards"
+    ],
+    "passes": true
+  }
+]

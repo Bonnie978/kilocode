@@ -16,7 +16,11 @@
     "random": "echo 'Random script'",
     "hello": "echo 'Hello World!'",
     "test": "echo 'do not run tests from root' && exit 1",
-    "extension": "bun --cwd packages/kilo-vscode script/launch.ts"
+    "extension": "bun --cwd packages/kilo-vscode script/launch.ts",
+    "web": "bun --cwd packages/kilo-web dev",
+    "serve": "bun run --cwd packages/opencode --conditions=browser src/index.ts serve --port 8787 --hostname 127.0.0.1",
+    "user-stories:verify": "bun run scripts/verify-user-stories.ts",
+    "ralph": "bun run scripts/ralph/runner.ts"
   },
   "workspaces": {
     "packages": [

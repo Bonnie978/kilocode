@@ -1,0 +1,272 @@
+/*
+ * --vscode-* variable fallbacks for the browser.
+ *
+ * The webview-ui/src code base uses 120+ --vscode-* CSS variables that
+ * VS Code injects automatically when running in a webview. In a plain
+ * browser tab those variables don't exist, so every reference fell back
+ * to the spec default (`initial`) — i.e. the page rendered with no
+ * styling at all (white background, black text, no borders).
+ *
+ * Values below are the standard "Dark+" theme colors. They apply to
+ * :root with the lowest specificity so any future, more specific
+ * --vscode-* declaration wins.
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* ===== Typography ===== */
+  --vscode-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Roboto, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --vscode-font-size: 13px;
+  --vscode-font-weight: normal;
+  --vscode-editor-font-family: "SF Mono", "Menlo", "Monaco", Consolas, "Courier New", monospace;
+  --vscode-editor-font-size: 13px;
+  --vscode-editor-font-weight: normal;
+
+  /* ===== Foreground / text ===== */
+  --vscode-foreground: #cccccc;
+  --vscode-descriptionForeground: #989898;
+  --vscode-disabledForeground: #6e6e6e;
+  --vscode-errorForeground: #f48771;
+  --vscode-textLink-foreground: #3794ff;
+  --vscode-textLink-activeForeground: #3794ff;
+  --vscode-textPreformat-foreground: #d7ba7d;
+  --vscode-textBlockQuote-background: #7f7f7f1a;
+  --vscode-textBlockQuote-border: #007acc80;
+  --vscode-textCodeBlock-background: #0a0a0a66;
+  --vscode-textSeparator-foreground: #ffffff2e;
+
+  /* ===== Editor / surface backgrounds ===== */
+  --vscode-editor-background: #1e1e1e;
+  --vscode-editor-foreground: #d4d4d4;
+  --vscode-editor-selectionBackground: #264f78;
+  --vscode-editor-inactiveSelectionBackground: #3a3d41;
+  --vscode-editorWidget-background: #252526;
+  --vscode-editorWidget-foreground: #cccccc;
+  --vscode-editorWidget-border: #454545;
+  --vscode-editorGroupHeader-tabsBackground: #252526;
+  --vscode-editorStickyScrollHover-background: #2a2d2e;
+  --vscode-editorHoverWidget-statusBarBackground: #2c2c2d;
+
+  --vscode-sideBar-background: #252526;
+  --vscode-sideBar-foreground: #cccccc;
+  --vscode-sideBarSectionHeader-background: #00000000;
+
+  --vscode-panel-background: #1e1e1e;
+  --vscode-panel-border: #2b2b2b;
+  --vscode-panelTitle-activeForeground: #e7e7e7;
+  --vscode-panelTitle-inactiveForeground: #e7e7e766;
+
+  --vscode-titleBar-activeBackground: #3c3c3c;
+  --vscode-titleBar-activeForeground: #cccccc;
+
+  --vscode-statusBar-background: #007acc;
+  --vscode-statusBar-foreground: #ffffff;
+
+  /* ===== Focus / borders ===== */
+  --vscode-focusBorder: #007fd4;
+  --vscode-contrastBorder: transparent;
+  --vscode-contrastActiveBorder: transparent;
+
+  /* ===== Buttons ===== */
+  --vscode-button-background: #0e639c;
+  --vscode-button-foreground: #ffffff;
+  --vscode-button-hoverBackground: #1177bb;
+  --vscode-button-secondaryBackground: #3a3d41;
+  --vscode-button-secondaryForeground: #ffffff;
+  --vscode-button-secondaryHoverBackground: #45494e;
+
+  /* ===== Inputs ===== */
+  --vscode-input-background: #3c3c3c;
+  --vscode-input-foreground: #cccccc;
+  --vscode-input-border: transparent;
+  --vscode-input-placeholderForeground: #a6a6a6;
+  --vscode-inputOption-activeBorder: #007acc;
+  --vscode-inputOption-activeBackground: #007acc40;
+  --vscode-inputValidation-errorBackground: #5a1d1d;
+  --vscode-inputValidation-errorBorder: #be1100;
+  --vscode-inputValidation-warningBackground: #352a05;
+  --vscode-inputValidation-warningBorder: #b89500;
+  --vscode-inputValidation-infoBackground: #063b49;
+  --vscode-inputValidation-infoBorder: #007acc;
+
+  /* ===== Lists / pickers ===== */
+  --vscode-list-hoverBackground: #2a2d2e;
+  --vscode-list-hoverForeground: #ffffff;
+  --vscode-list-activeSelectionBackground: #094771;
+  --vscode-list-activeSelectionForeground: #ffffff;
+  --vscode-list-inactiveSelectionBackground: #37373d;
+  --vscode-list-inactiveSelectionForeground: #cccccc;
+  --vscode-list-focusBackground: #062f4a;
+  --vscode-list-focusForeground: #ffffff;
+  --vscode-list-highlightForeground: #2aaaff;
+
+  /* ===== Toolbar / menu ===== */
+  --vscode-toolbar-hoverBackground: #5a5d5e50;
+  --vscode-toolbar-activeBackground: #62686b;
+  --vscode-menu-background: #252526;
+  --vscode-menu-foreground: #cccccc;
+  --vscode-menu-selectionBackground: #094771;
+  --vscode-menu-selectionForeground: #ffffff;
+  --vscode-menu-separatorBackground: #454545;
+
+  /* ===== Badges ===== */
+  --vscode-badge-foreground: #ffffff;
+  --vscode-badge-background: #4d4d4d;
+  --vscode-activityBarBadge-foreground: #ffffff;
+  --vscode-activityBarBadge-background: #007acc;
+
+  /* ===== Scrollbar ===== */
+  --vscode-scrollbar-shadow: #000000;
+  --vscode-scrollbarSlider-background: #79797966;
+  --vscode-scrollbarSlider-hoverBackground: #646464b3;
+  --vscode-scrollbarSlider-activeBackground: #bfbfbf66;
+
+  /* ===== Diff editor ===== */
+  --vscode-diffEditor-insertedLineBackground: #9bb95533;
+  --vscode-diffEditor-insertedTextBackground: #9bb95566;
+  --vscode-diffEditor-removedLineBackground: #f14c4c33;
+  --vscode-diffEditor-removedTextBackground: #f14c4c66;
+  --vscode-diffEditor-unchangedCodeBackground: #1e1e1e;
+
+  /* ===== Markers ===== */
+  --vscode-editorMarkerNavigationError-background: #1e1e1e;
+  --vscode-editorMarkerNavigationError-headerBackground: #f14c4c1a;
+  --vscode-editorMarkerNavigationWarning-background: #1e1e1e;
+  --vscode-editorMarkerNavigationWarning-headerBackground: #cca7001a;
+  --vscode-editorMarkerNavigationInfo-background: #1e1e1e;
+  --vscode-editorMarkerNavigationInfo-headerBackground: #3794ff1a;
+
+  /* ===== Charts (status indicators, badges) ===== */
+  --vscode-charts-foreground: #cccccc;
+  --vscode-charts-lines: #5a5d5e;
+  --vscode-charts-red: #f14c4c;
+  --vscode-charts-green: #89d185;
+  --vscode-charts-yellow: #cca700;
+  --vscode-charts-blue: #3794ff;
+  --vscode-charts-orange: #d18616;
+  --vscode-charts-purple: #b180d7;
+
+  /* ===== Testing icons ===== */
+  --vscode-testing-iconPassed: #73c991;
+  --vscode-testing-iconFailed: #f14c4c;
+  --vscode-testing-iconErrored: #f14c4c;
+  --vscode-testing-iconSkipped: #848484;
+  --vscode-testing-iconQueued: #cca700;
+
+  /* ===== Tab ===== */
+  --vscode-tab-activeBackground: #1e1e1e;
+  --vscode-tab-activeForeground: #ffffff;
+  --vscode-tab-inactiveBackground: #2d2d2d;
+  --vscode-tab-inactiveForeground: #cccccc80;
+  --vscode-tab-border: #252526;
+  --vscode-tab-activeBorder: transparent;
+  --vscode-tab-activeBorderTop: #007fd4;
+
+  /* ===== Notification ===== */
+  --vscode-notifications-background: #252526;
+  --vscode-notifications-foreground: #cccccc;
+  --vscode-notifications-border: #303031;
+  --vscode-notificationsErrorIcon-foreground: #f48771;
+  --vscode-notificationsWarningIcon-foreground: #cca700;
+  --vscode-notificationsInfoIcon-foreground: #3794ff;
+
+  /* ===== Terminal ===== */
+  --vscode-terminal-background: #1e1e1e;
+  --vscode-terminal-foreground: #cccccc;
+  --vscode-terminal-selectionBackground: #ffffff40;
+  --vscode-terminal-border: #80808059;
+
+  /* ===== Quick input ===== */
+  --vscode-quickInput-background: #252526;
+  --vscode-quickInput-foreground: #cccccc;
+  --vscode-quickInputList-focusBackground: #094771;
+
+  /* ===== Settings ===== */
+  --vscode-settings-headerForeground: #e7e7e7;
+  --vscode-settings-modifiedItemIndicator: #007acc;
+  --vscode-settings-dropdownBackground: #3c3c3c;
+  --vscode-settings-dropdownForeground: #cccccc;
+  --vscode-settings-dropdownBorder: #3c3c3c;
+  --vscode-settings-checkboxBackground: #3c3c3c;
+  --vscode-settings-checkboxForeground: #cccccc;
+  --vscode-settings-checkboxBorder: #3c3c3c;
+  --vscode-settings-textInputBackground: #3c3c3c;
+  --vscode-settings-textInputForeground: #cccccc;
+  --vscode-settings-textInputBorder: transparent;
+}
+
+body {
+  background-color: #141414; /* slightly darker outer chrome to frame the panel */
+  color: var(--vscode-foreground);
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size);
+  margin: 0;
+}
+
+/* Constrain the entire app to the typical VS Code side-panel width
+   (~420px) and center it. Outside the panel falls back to body bg. */
+#root {
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: var(--vscode-editor-background);
+  border-left: 1px solid var(--vscode-panel-border);
+  border-right: 1px solid var(--vscode-panel-border);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hide the "反馈与支持" button in the newTask welcome view (web build). */
+.feedback-button {
+  display: none !important;
+}
+
+/* Worktrees are a VSCode-side feature; the browser build doesn't support
+   them so hide every "新 Worktree" / "Worktree 高级选项" / "移动到 Worktree"
+   button (in newTask welcome and inside any chat action bar). */
+.session-worktree-split,
+.session-move-action {
+  display: none !important;
+}
+
+/* AccountSwitcher / login / cloud-account banners are tied to the Kilo
+   gateway and not meaningful for a local-only build. CSS-hide the chrome
+   while preserving the rest of the welcome view. */
+.account-switcher,
+.account-switcher-welcome,
+.remote-sync-banner {
+  display: none !important;
+}
+
+/* PopupSelector dropdowns (mode switcher / model picker / etc.) compute
+   their width from the trigger button by default. In the side-panel layout
+   that produces an unbounded width that overflows the 460px chrome and
+   even pushes the popup off-screen. Cap to the panel width. */
+[role="listbox"] {
+  max-width: 440px !important;
+  max-height: 60vh !important;
+  z-index: 9999;
+}
+
+/* Model picker is pinned to GLM 5.1 (newapi). The picker is the 2nd
+   child of the hint selectors row (1st child is the agent/mode switcher
+   which we DO want clickable). Disable just the model picker. */
+.prompt-input-hint-selectors > button:nth-child(2) {
+  pointer-events: none !important;
+  opacity: 0.7;
+  cursor: default !important;
+}
+
+/* virtua/solid Virtualizer renders children with inline style:
+   "visibility: hidden" during its measure phase, then flips to "visible"
+   after the first ResizeObserver tick. In the browser+kilo-web setup
+   that flip occasionally never happens on initial mount (the trigger
+   path is wired to VS Code's webview resize events). Force every
+   virtualized child to render visibly. */
+.message-list-content > div[style*="visibility"],
+.message-list-content > div[style*="visibility"] > div[style*="visibility"] {
+  visibility: visible !important;
+}

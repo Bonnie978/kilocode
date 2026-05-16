@@ -1,0 +1,27 @@
+{
+  "name": "@kilocode/kilo-web",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Standalone browser app for kilocode — connects to a local opencode server.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@kilocode/kilo-ui": "workspace:*",
+    "@kilocode/sdk": "workspace:*",
+    "solid-js": "catalog:"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "catalog:",
+    "@tsconfig/node22": "catalog:",
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-solid": "catalog:",
+    "yaml": "2.6.1"
+  }
+}
