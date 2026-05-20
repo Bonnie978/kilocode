@@ -2,6 +2,66 @@
 
 > 用 kilo-web 替代 PRD：让每个人（产品 / 设计 / 工程）打开浏览器，直接让 AI agent 改插件本身，把"想要的功能"做成一个**能跑的原型**而不是 Word 文档。
 
+---
+
+## 分支策略
+
+三层模型，职责清晰：
+
+```
+stable           ← 永远稳定的基线。任何时候改坏了都能从这里找回。
+   │              只有 lead 在"确认这版上线"时才往这里合。
+   │
+main             ← 当前 demo 集成版（团队 clone 默认拿这个）。
+   │              feat 分支验证可行后 PR 合进来，给研发 / 老板看。
+   │
+feat/<你>-<X>   ← 个人实验分支。自由切、自由改、自由删。
+                  跑通了开 PR 回 main。
+```
+
+### 各层职责
+
+| 分支 | 谁能直接 push | 什么时候动 |
+|---|---|---|
+| `stable` | lead 一人 | demo 确认上线、拍板"就这版"之后，把 main → stable 合一次 |
+| `main` | 禁止直接 push | 只接受来自 `feat/*` 的 PR merge |
+| `feat/<你>-<X>` | 各自 | 每个人随时在自己分支干 |
+
+### 四阶段工作流
+
+```
+① 起步   git checkout -b feat/<你>-<想法> main
+          → vibe coding → push 自己分支
+
+② demo   开 PR: feat/<你>-<X> → main
+          → merge → 给研发看 demo
+
+③ 反馈   评审后"X 要改" → 继续在 feat 上改 → 重新 PR → merge main
+
+④ 上线   功能确认上线 → lead 执行:
+          git checkout stable
+          git merge main
+          git push origin stable
+```
+
+### 紧急回滚
+
+任何时候 main 改坏、找不到之前状态：
+
+```bash
+# 查看 stable 当前状态
+git log stable --oneline -10
+
+# 把本地 main 重置到 stable（本地操作，不影响远端）
+git checkout main
+git reset --hard stable
+
+# 或者直接从 stable 切一个新的 feat 分支重新来过
+git checkout -b feat/<你>-fix stable
+```
+
+---
+
 ## 为什么这样工作可行
 
 `packages/kilo-web` 是 kilocode 浏览器版，连本地 `opencode serve`。它本质上是一个**会改自己的产品**：
@@ -186,6 +246,9 @@ gh pr create --base feat/kilo-web --title "..." --body "..."
 ---
 
 ## 常见问题
+
+**Q：整个 main 都被改坏了，找不到之前状态怎么办？**
+A：`stable` 就是保险网。`git checkout -b feat/<你>-fix stable` 从稳定版重新开始，或者让 lead 把 main reset 回 stable。
 
 **Q：Agent 改坏了怎么办？**
 A：`git stash` 或 `git checkout -- <file>` 撤销。Agent 的工具有 permission 流程，每个写入都你点过运行才生效。
